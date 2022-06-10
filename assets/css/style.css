@@ -1,3 +1,14 @@
+h1 {
+    font-family: 'Tiro Gurmukhi', serif;
+    text-shadow: 0 0 10px;
+    color: #fff;
+}
+
+.container .row:first-child {
+    background: url(../images/weather.jpg);
+}
+
+
 .form-search {
     border-bottom: 1px solid black;
 }
@@ -5,3 +16,12 @@
 .form-history {
     border: 1px solid red;
 }
+
+.today {
+    border: 1px solid red;
+}
+
+
+
+    /* font-family: 'Oswald', sans-serif; */
+    /* font-family: 'Tiro Gurmukhi', serif;  */
