@@ -22,16 +22,16 @@
             <aside class="form col-lg-2 col-sm-12 mt-3">
                 <!-- <h4>Search for a City</h4> -->
                 <section class="form-search pb-4 text-center">
-                    <form>
+                    <form class="form-ask">
                         <label for="search-city">Search for a City</label>
                         <input type="search" name="search-city" id="search-city" value="">
                     </form>
                     <button type="submit" class="btn btn-primary" id="btn-search-city">Search</button>                    
                 </section>
-                <section class="form-history pt-4 mt-4">
+                <section class="form-history mt-4">
                     <h6>Search history:</h6>
                     <div class="history-part d-flex flex-column"></div>
-                    <button type="button" class="btn btn-link">Clear history</button>
+                    <button type="button" class="btn btn-link" id="btn-clear">Clear history</button>
                 </section>
             </aside>
             <main class="weather col-lg-10 col-sm-12 mt-3 text-center">
@@ -97,7 +97,7 @@
             <section class="sub col-12 col-sm-12 m-4 justify-content-center text-center mt-4">
                 <form action="">
                     <h3>Subscribe Us</h3>
-                    <p>leave your info, you can receive weather forecast as soon as possible.</p>
+                    <p>You can receive a weather forecast as soon as possible once the weather changed.</p>
                     <label for="email">Email:</label>
                     <input type="email" name="email" id="email">
                     <label for="phone">Phone:</label>

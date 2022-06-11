@@ -13,13 +13,22 @@ h1 {
     border-bottom: 1px solid black;
 }
 
-.form-history {
+/* .form-history {
     border: 1px solid red;
+} */
+
+.form-ask input {
+    width: 135px;
+    margin-bottom: 10px;
 }
 
-.today {
-    border: 1px solid red;
+#btn-clear {
+    text-decoration: none;
 }
+
+/* .today {
+    border: 1px solid red;
+} */
 
 
 
