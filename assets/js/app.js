@@ -72,6 +72,12 @@ function fetchApiData(city) {
         if (response.ok) {
             response.json().then(function(data) {
             // console.log(data);
+
+            // clear old
+            var removeAll = todayWeatherEl;
+            while (removeAll.hasChildNodes()) {
+                removeAll.removeChild(removeAll.firstChild);
+            }
             // get city coordinates
             var cityCoord = data.coord;
             // get date
@@ -150,8 +156,6 @@ function fetchApiWeather(cityCoord) {
             var uvColor = document.querySelector(".uv-index");
             uvColor.classList.add("violet");
         }
-
-        
     });
 }
 
