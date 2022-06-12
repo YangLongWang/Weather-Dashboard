@@ -71,7 +71,7 @@ function fetchApiData(city) {
     fetch(apiCity).then(function(response) {
         if (response.ok) {
             response.json().then(function(data) {
-            console.log(data);
+            // console.log(data);
             // get city coordinates
             var cityCoord = data.coord;
             // get date
@@ -85,7 +85,7 @@ function fetchApiData(city) {
             // get icon
             // it's wrong, 
             var icon = data.weather[0].icon;
-            var iconUrl = `<img src = "http://openweathermap.org/img/wn/${icon}@2x.png" alt = "" >`;
+            var iconUrl = `<img src = "http://openweathermap.org/img/wn/${icon}@2x.png" alt = "" />`;
             // display city, date, icon
             // icon does not finish
             var displayCity = document.createElement("h2");
@@ -105,7 +105,7 @@ function fetchApiData(city) {
 }
 
 function fetchApiWeather(cityCoord) {
-    apiWeather = `https://api.openweathermap.org/data/2.5/onecall?lat=${cityCoord.lat}&lon=${cityCoord.lon}&exclude=minutely,hourly,alerts,daily&appid=${apiKey}`;
+    apiWeather = `https://api.openweathermap.org/data/2.5/onecall?lat=${cityCoord.lat}&lon=${cityCoord.lon}&exclude=minutely,hourly,alerts,daily&units=metric&appid=${apiKey}`;
     
     fetch(apiWeather)
     .then(function(response) {
@@ -113,12 +113,44 @@ function fetchApiWeather(cityCoord) {
     })
     .then(function(data) {
         console.log(data);
+        // temperature
+        var temperatureEl = document.createElement("li");
+        temperatureEl.classList.add("today-weather");
+        temperatureEl.innerHTML = "<span>Temperature: " + data.current.temp + "&#8451</span>";
+        todayWeatherEl.appendChild(temperatureEl);
+        // wind speed
+        var windSpeedEl = document.createElement("li");
+        windSpeedEl.classList.add("today-weather");
+        windSpeedEl.textContent = "Wind Speed: " + data.current.wind_speed + "m/s";
+        todayWeatherEl.appendChild(windSpeedEl);
+        // humidity
+        var humidityEl = document.createElement("li");
+        humidityEl.classList.add("today-weather");
+        humidityEl.textContent = "Humidity: " + data.current.humidity + "%";
+        todayWeatherEl.appendChild(humidityEl);
+        // UV index
+        var uvIndexEl = document.createElement("li");
+        uvIndexEl.classList.add("today-weather");
+        uvIndexEl.innerHTML = "UV Index: <span class='uv-index'>" + data.current.uvi + "</span>";
+        todayWeatherEl.appendChild(uvIndexEl);
 
-        var weatherEl = document.createElement("li");
-        weatherEl.classList.add("today-weather");
-        weatherEl.textContent = data.current;
-        todayWeatherEl.appendChild(weatherEl);
-        console.log(todayWeatherEl);
+        if (data.current.uvi>=0 && data.current.uvi<3) {
+            var uvColor = document.querySelector(".uv-index");
+            uvColor.classList.add("green");
+        } else if (data.current.uvi>=3 && data.current.uvi<6) {
+            var uvColor = document.querySelector(".uv-index");
+            uvColor.classList.add("yellow");
+        } else if (data.current.uvi>=6 && data.current.uvi<8) {
+            var uvColor = document.querySelector(".uv-index");
+            uvColor.classList.add("orange");
+        } else if (data.current.uvi>=8 && data.current.uvi<11) {
+            var uvColor = document.querySelector(".uv-index");
+            uvColor.classList.add("red");
+        } else {
+            var uvColor = document.querySelector(".uv-index");
+            uvColor.classList.add("violet");
+        }
+
         
     });
 }

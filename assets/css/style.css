@@ -17,6 +17,10 @@ h1 {
     border: 1px solid red;
 } */
 
+.form-ask label {
+    font-weight: bold;
+}
+
 .form-ask input {
     width: 135px;
     margin-bottom: 10px;
@@ -26,11 +30,58 @@ h1 {
     text-decoration: none;
 }
 
-/* .today {
-    border: 1px solid red;
-} */
+.today {
+    /* border: 1px solid red; */
+    text-align: left;
+}
 
+.today h2 {
+    text-align: center;
+    font-weight: bold;
+    background-color: aqua;
+}
 
+.today li {
+    list-style-type: none;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.green {
+    background-color: green;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.yellow {
+    background-color: yellow;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.orange {
+    background-color: orange;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 10px;
+
+}
+
+.red {
+    background-color: red;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.violet {
+    background-color: violet;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
 
     /* font-family: 'Oswald', sans-serif; */
     /* font-family: 'Tiro Gurmukhi', serif;  */
