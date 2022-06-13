@@ -1,10 +1,4 @@
 var cityData = []; 
-// need to change array to object for saving data in localstorage
-// not finish yet.
-var cityData = [{
-
-}];
-
 var cityId = 0;
 var searchCityBtn = document.querySelector("#btn-search-city");
 var searchCity = document.querySelector("#search-city");
@@ -16,27 +10,46 @@ var fiveDaytemp = document.querySelector(".card-body");
 
 // starting search
 function searchCityEl() {
+
     var city = searchCity.value.toLowerCase();
     if (!city) {
         alert("please enter a city");
     } else {
-        cityData.push(city);
-        searchCity.value = "";
-
-        searchHistoryEl(city);
+        var searchCityObj = {
+            record : city
+        };
+      
+        searchHistoryEl(searchCityObj);
         fetchApiData(city);
+        searchCity.value = "";
         savedata();
     }
 }
 
 // create search history in historyEl(".history-part")
-function searchHistoryEl(info) {
+function searchHistoryEl(searchCityObj) {
     var cityList = document.createElement("button");
     cityList.classList.add("city-list", "mt-2");
     cityList.setAttribute("data-city-id", cityId);
-    cityList.textContent = info;
+    cityList.textContent = searchCityObj.record;
     historyEl.appendChild(cityList);
+
+    searchCityObj.id = cityId;
+    cityData.push(searchCityObj);
+
     cityId++;
+}
+
+// click a city in history 
+var searchHistoryCity = function(event) {
+    var targetEl = event.target;
+    var cityHistoryId = targetEl.getAttribute("data-city-id");
+    for (var i=0; i<cityData.length; i++) {
+        if (cityData[i].id === parseInt(cityHistoryId)) {
+            var historyCityName = cityData[i].record;
+            fetchApiData(historyCityName);
+        }
+    }
 }
 
 // clear search history
@@ -60,15 +73,16 @@ function loadsearch() {
         return false;
     }
 
-    var loadArr = load.split(",");
-    for (var i=0; i<loadArr.length; i++) {
-        searchHistoryEl(loadArr[i]);
+    load = JSON.parse(load);
+
+    for (var i=0; i<load.length; i++) {
+        searchHistoryEl(load[i]);
     }
 }
 
 // save search city in localstorage
 function savedata() {
-    localStorage.setItem("city", cityData);
+    localStorage.setItem("city", JSON.stringify(cityData));
 }
 
 // city, date, & icon
@@ -78,7 +92,6 @@ function fetchApiData(city) {
     fetch(apiCity).then(function(response) {
         if (response.ok) {
             response.json().then(function(data) {
-            // console.log(data);
 
             // clear old
             var removeAll = todayWeatherEl;
@@ -123,7 +136,7 @@ function fetchApiWeather(cityCoord) {
         return response.json();
     })
     .then(function(data) {
-        // console.log(data);
+
         // temperature
         var temperatureEl = document.createElement("li");
         temperatureEl.classList.add("today-weather");
@@ -246,7 +259,6 @@ function fiveDayForecast(daily) {
     }
 }
 
-
 // when alert, remove last one record
 function removeLastOne() { // not fishish
     var removeLastOne = historyEl;
@@ -260,11 +272,8 @@ function removeLastOne() { // not fishish
     // localstorage does not accomplish, it need to delete last one data, not all element.
 }
 
-
-
-
-
-searchCityBtn.addEventListener("click", searchCityEl)
-btnClearEl.addEventListener("click", clearHistoryEl)
+searchCityBtn.addEventListener("click", searchCityEl);
+btnClearEl.addEventListener("click", clearHistoryEl);
+historyEl.addEventListener("click", searchHistoryCity);
 
 loadsearch();
