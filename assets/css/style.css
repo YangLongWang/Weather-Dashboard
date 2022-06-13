@@ -1,3 +1,20 @@
+.form {
+    /* background-color: #85B0FF; */
+    /* background-color: #00CCFF; */
+    background-color: #75b4e3;
+    padding: 10px 10px;
+}
+
+.weather {
+    background-color: #00CCFF;
+    padding: 10px 0;
+}
+
+.sub {
+    background-color: #85B0FF;
+    padding: 10px 0;
+}
+
 h1 {
     font-family: 'Tiro Gurmukhi', serif;
     text-shadow: 0 0 10px;
@@ -13,15 +30,75 @@ h1 {
     border-bottom: 1px solid black;
 }
 
-.form-history {
+/* .form-history {
     border: 1px solid red;
+} */
+
+.form-ask label {
+    font-weight: bold;
+}
+
+.form-ask input {
+    width: 135px;
+    margin-bottom: 10px;
+}
+
+#btn-clear {
+    text-decoration: none;
 }
 
 .today {
-    border: 1px solid red;
+    text-align: left;
 }
 
+.today h2 {
+    text-align: center;
+    font-weight: bold;
+}
 
+.today li {
+    list-style-type: none;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.green, .yellow, .orange, .red, .violet {
+    padding: 3px 5px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.green {
+    background-color: green;    
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.orange {
+    background-color: orange;
+}
+
+.red {
+    background-color: red;
+}
+
+.violet {
+    background-color: violet;
+}
+
+#five-day-title {
+    margin: 10px;
+}
+
+.card-text {
+    list-style-type: none;
+}
+
+.card-body li .card-text {
+    list-style-type: none;
+}
 
     /* font-family: 'Oswald', sans-serif; */
     /* font-family: 'Tiro Gurmukhi', serif;  */

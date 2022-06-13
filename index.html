@@ -22,92 +22,33 @@
             <aside class="form col-lg-2 col-sm-12 mt-3">
                 <!-- <h4>Search for a City</h4> -->
                 <section class="form-search pb-4 text-center">
-                    <form>
-                        <label for="search-city">Search for a City</label>
-                        <input type="search" name="search-city" id="search-city" value="">
+                    <form class="form-ask">
+                        <label for="search-city">Search for a City:</label>
+                        <input type="text" name="search-city" id="search-city" value="">
                     </form>
-                    <button type="submit" class="btn btn-primary">Search</button>                    
+                    <button type="submit" class="btn btn-primary" id="btn-search-city">Search</button>                    
                 </section>
-                <section class="form-history pt-4 mt-4">
-                    <h6>Search history</h6>
-                    <div class="history-part">
-                        <ul>
-                            <li>1</li>
-                            <li>2</li>
-                            <li>3</li>
-                        </ul>                        
-                    </div>
-                    <button type="button" class="btn btn-link">Clear history</button>
+                <section class="form-history mt-4">
+                    <h6>Search history:</h6>
+                    <div class="history-part d-flex flex-column"></div>
+                    <button type="button" class="btn btn-link" id="btn-clear">Clear history</button>
                 </section>
             </aside>
             <main class="weather col-lg-10 col-sm-12 mt-3 text-center">
-                <section class="today">
-                    <h2>today Weather</h2>
-                    <section class="info">
-                        <ul>
-                            <li>the city name</li>
-                            <li>the date</li>
-                            <li>an icon representation of weather conditions</li>
-                            <li>the temperature</li>
-                            <li>the humidity</li>
-                            <li>the wind speed</li>
-                            <li>the UV index</li>
-                        </ul>
-                    </section>
-                </section>
-                <section class="fiveday-forecast d-inline-flex p-2 bd-highlight flex-wrap">
-                    <div class="card" style="width: 11rem;">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 11rem;">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 11rem;">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 11rem;">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 11rem;">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </section>
+                <section class="today"></section>
+                <section class="fiveday-forecast d-inline-flex p-2 bd-highlight flex-wrap justify-content-lg-between text-left"></section>
             </main>
         </div>
         <div class="row">
-            <section class="sub col-12 col-sm-12 m-4 justify-content-center text-center mt-4">
+            <section class="sub col-12 col-sm-12 mt-3 text-center">
                 <form action="">
                     <h3>Subscribe Us</h3>
-                    <p>leave your info, you can receive weather forecast as soon as possible.</p>
+                    <p>You can receive a weather forecast as soon as possible once the weather changed.</p>
                     <label for="email">Email:</label>
                     <input type="email" name="email" id="email">
                     <label for="phone">Phone:</label>
                     <input type="text" name="phone" id="phone">
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </section>
         </div>
@@ -116,6 +57,7 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/992046c620.js" crossorigin="anonymous"></script>
+    <script src="./assets/js/config.js"></script>
     <script src="./assets/js/app.js"></script>
 </body>
 </html>
