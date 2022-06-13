@@ -61,7 +61,7 @@ function clearHistoryEl() {
     }
 
     cityData.length = 0;
-    // console.log(cityData);
+
     window.localStorage.clear();
 }
 
@@ -260,7 +260,7 @@ function fiveDayForecast(daily) {
 }
 
 // when alert, remove last one record
-function removeLastOne() { // not fishish
+function removeLastOne() {
     var removeLastOne = historyEl;
 
     if (removeLastOne.hasChildNodes()) {
@@ -268,8 +268,8 @@ function removeLastOne() { // not fishish
     }
 
     cityData.pop();
-    window.localStorage.removeItem("city");
-    // localstorage does not accomplish, it need to delete last one data, not all element.
+
+    localStorage.setItem("city", JSON.stringify(cityData));
 }
 
 searchCityBtn.addEventListener("click", searchCityEl);
