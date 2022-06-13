@@ -1,3 +1,19 @@
+.form {
+    /* background-color: #85B0FF; */
+    /* background-color: #00CCFF; */
+    background-color: #75b4e3;
+}
+
+.weather {
+    background-color: #00CCFF;
+    padding: 10px 0;
+}
+
+.sub {
+    background-color: #85B0FF;
+    padding: 10px 0;
+}
+
 h1 {
     font-family: 'Tiro Gurmukhi', serif;
     text-shadow: 0 0 10px;
@@ -31,14 +47,12 @@ h1 {
 }
 
 .today {
-    /* border: 1px solid red; */
     text-align: left;
 }
 
 .today h2 {
     text-align: center;
     font-weight: bold;
-    background-color: aqua;
 }
 
 .today li {
@@ -47,40 +61,42 @@ h1 {
     margin-bottom: 10px;
 }
 
-.green {
-    background-color: green;
-    padding: 5px;
+.green, .yellow, .orange, .red, .violet {
+    padding: 3px 5px;
     border: 1px solid black;
     border-radius: 10px;
+}
+
+.green {
+    background-color: green;    
 }
 
 .yellow {
     background-color: yellow;
-    padding: 5px;
-    border: 1px solid black;
-    border-radius: 10px;
 }
 
 .orange {
     background-color: orange;
-    padding: 5px;
-    border: 1px solid black;
-    border-radius: 10px;
-
 }
 
 .red {
     background-color: red;
-    padding: 5px;
-    border: 1px solid black;
-    border-radius: 10px;
 }
 
 .violet {
     background-color: violet;
-    padding: 5px;
-    border: 1px solid black;
-    border-radius: 10px;
+}
+
+#five-day-title {
+    margin: 10px;
+}
+
+.card-text {
+    list-style-type: none;
+}
+
+.card-body li .card-text {
+    list-style-type: none;
 }
 
     /* font-family: 'Oswald', sans-serif; */

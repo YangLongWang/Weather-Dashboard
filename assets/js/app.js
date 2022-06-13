@@ -11,6 +11,8 @@ var searchCity = document.querySelector("#search-city");
 var historyEl = document.querySelector(".history-part");
 var btnClearEl = document.querySelector("#btn-clear");
 var todayWeatherEl = document.querySelector(".today");
+var fiveDayEl = document.querySelector(".fiveday-forecast");
+var fiveDaytemp = document.querySelector(".card-body");
 
 // starting search
 function searchCityEl() {
@@ -53,6 +55,11 @@ function clearHistoryEl() {
 // refresh page, load localstorage
 function loadsearch() {
     var load = localStorage.getItem("city");
+
+    if (!load) {
+        return false;
+    }
+
     var loadArr = load.split(",");
     for (var i=0; i<loadArr.length; i++) {
         searchHistoryEl(loadArr[i]);
@@ -89,11 +96,9 @@ function fetchApiData(city) {
             var date = dt.getDate();
             var time = month + ' ' + date + ' ' + year;
             // get icon
-            // it's wrong, 
             var icon = data.weather[0].icon;
             var iconUrl = `<img src = "http://openweathermap.org/img/wn/${icon}@2x.png" alt = "" />`;
             // display city, date, icon
-            // icon does not finish
             var displayCity = document.createElement("h2");
             displayCity.classList.add("city-name");
             displayCity.innerHTML = data.name + " (" + time + ") " + iconUrl;
@@ -111,33 +116,33 @@ function fetchApiData(city) {
 }
 
 function fetchApiWeather(cityCoord) {
-    apiWeather = `https://api.openweathermap.org/data/2.5/onecall?lat=${cityCoord.lat}&lon=${cityCoord.lon}&exclude=minutely,hourly,alerts,daily&units=metric&appid=${apiKey}`;
+    apiWeather = `https://api.openweathermap.org/data/2.5/onecall?lat=${cityCoord.lat}&lon=${cityCoord.lon}&exclude=minutely,hourly,alerts&units=metric&appid=${apiKey}`;
     
     fetch(apiWeather)
     .then(function(response) {
         return response.json();
     })
     .then(function(data) {
-        console.log(data);
+        // console.log(data);
         // temperature
         var temperatureEl = document.createElement("li");
         temperatureEl.classList.add("today-weather");
-        temperatureEl.innerHTML = "<span>Temperature: " + data.current.temp + "&#8451</span>";
+        temperatureEl.innerHTML = "<span><b>Temperature: </b>" + data.current.temp + "&#8451</span>";
         todayWeatherEl.appendChild(temperatureEl);
         // wind speed
         var windSpeedEl = document.createElement("li");
         windSpeedEl.classList.add("today-weather");
-        windSpeedEl.textContent = "Wind Speed: " + data.current.wind_speed + "m/s";
+        windSpeedEl.innerHTML = "<b>Wind Speed: </b>" + data.current.wind_speed + " m/s";
         todayWeatherEl.appendChild(windSpeedEl);
         // humidity
         var humidityEl = document.createElement("li");
         humidityEl.classList.add("today-weather");
-        humidityEl.textContent = "Humidity: " + data.current.humidity + "%";
+        humidityEl.innerHTML = "<b>Humidity: </b>" + data.current.humidity + "%";
         todayWeatherEl.appendChild(humidityEl);
         // UV index
         var uvIndexEl = document.createElement("li");
         uvIndexEl.classList.add("today-weather");
-        uvIndexEl.innerHTML = "UV Index: <span class='uv-index'>" + data.current.uvi + "</span>";
+        uvIndexEl.innerHTML = "<b>UV Index: </b><span class='uv-index'>" + data.current.uvi + "</span>";
         todayWeatherEl.appendChild(uvIndexEl);
 
         if (data.current.uvi>=0 && data.current.uvi<3) {
@@ -156,8 +161,91 @@ function fetchApiWeather(cityCoord) {
             var uvColor = document.querySelector(".uv-index");
             uvColor.classList.add("violet");
         }
+        // can add a UV index table (bootstrap)
+        // 
+
+        fiveDayForecast(data.daily);
+
     });
 }
+
+function fiveDayForecast(daily) {
+    // clear old
+    var removeAll = fiveDayEl;
+    while (removeAll.hasChildNodes()) {
+        removeAll.removeChild(removeAll.firstChild);
+    }
+    
+    // five day forecast
+    var fiveDayTitle = document.createElement("h3");
+    fiveDayTitle.classList.add("col-12");
+    fiveDayTitle.setAttribute("id", "five-day-title");
+    fiveDayTitle.textContent = "5-Day Forecast:";
+    fiveDayEl.appendChild(fiveDayTitle);
+    var fiveDayArr = [];
+    for (var i=1; i<daily.length-2; i++) {
+        // time            
+        var fiveDaydt = daily[i].dt;
+        fiveDaydt = new Date(fiveDaydt*1000);
+        var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        var year = fiveDaydt.getFullYear();
+        var month = months[fiveDaydt.getMonth()];
+        var date = fiveDaydt.getDate();
+        var time = month + ' ' + date + ' ' + year;
+        // icon
+        var fiveDayIcon = daily[i].weather[0].icon;
+        // temperature
+        var fiveDayTemp = daily[i].temp.day;     
+        // wind speed
+        var fiveDayWind = daily[i].wind_speed;
+        // the humidity
+        var fiveDayHumidity = daily[i].humidity;
+        // create an object to save one-day weather
+        var fiveDayObj = {
+            fdate : time,
+            ficon : fiveDayIcon,
+            ftemp : fiveDayTemp,
+            fwind : fiveDayWind,
+            fhumidity: fiveDayHumidity
+        };
+        // push fiveDayObj into fiveDayArr
+        fiveDayArr.push(fiveDayObj);
+    }
+
+    // create five day weather card
+    for (var i=0; i<5; i++) {
+        var fDayCard = document.createElement("div");
+        fDayCard.classList.add("card");
+        fDayCard.setAttribute("style", "width: 10rem;")
+
+        var fDayContent = document.createElement("div");
+        fDayContent.classList.add("card-body");
+
+        var date = document.createElement("h5");
+        date.classList.add("card-title");
+        date.innerHTML = `${fiveDayArr[i].fdate}` + " " + `<img src = "http://openweathermap.org/img/wn/${fiveDayArr[i].ficon}@2x.png" alt = "" />`;
+        fDayContent.appendChild(date);
+
+        var temp = document.createElement("li");
+        temp.classList.add("card-text");
+        temp.innerHTML = "<b>Temperature: </b><br/>" + fiveDayArr[i].ftemp + "<span>&#8451</span>";
+        fDayContent.appendChild(temp);
+
+        var wind = document.createElement("li");
+        wind.classList.add("card-text");
+        wind.innerHTML = "<b>Wind Speed: </b><br/>" + fiveDayArr[i].fwind + " m/s";
+        fDayContent.appendChild(wind);
+
+        var humidity = document.createElement("li");
+        humidity.classList.add("card-text");
+        humidity.innerHTML = "<b>Humidity: </b><br/>" + fiveDayArr[i].fhumidity + "%";
+
+        fDayContent.appendChild(humidity);
+        fDayCard.appendChild(fDayContent);
+        fiveDayEl.appendChild(fDayCard);
+    }
+}
+
 
 // when alert, remove last one record
 function removeLastOne() { // not fishish
@@ -180,12 +268,3 @@ searchCityBtn.addEventListener("click", searchCityEl)
 btnClearEl.addEventListener("click", clearHistoryEl)
 
 loadsearch();
-
-
-
-
-// https://api.openweathermap.org/data/2.5/onecall/timemachine?lat={lat}&lon={lon}&dt={time}&appid={API key}
-// https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
-// http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
-// http://api.openweathermap.org/geo/1.0/reverse?lat={lat}&lon={lon}&limit={limit}&appid={API key}
-// API key: 4f585493f941e0eeef3857860aa417e6
