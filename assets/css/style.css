@@ -64,12 +64,11 @@ h1 {
 
 .green, .yellow, .orange, .red, .violet {
     padding: 3px 5px;
-    border: 1px solid black;
     border-radius: 10px;
 }
 
 .green {
-    background-color: green;    
+    background-color: green;
 }
 
 .yellow {

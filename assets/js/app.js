@@ -7,6 +7,7 @@ var btnClearEl = document.querySelector("#btn-clear");
 var todayWeatherEl = document.querySelector(".today");
 var fiveDayEl = document.querySelector(".fiveday-forecast");
 var fiveDaytemp = document.querySelector(".card-body");
+var btnsubscribe = document.querySelector(".btn-subscribe");
 
 // starting search
 function searchCityEl() {
@@ -136,27 +137,34 @@ function fetchApiWeather(cityCoord) {
         return response.json();
     })
     .then(function(data) {
+        var rowWeather = document.createElement("div");
+        rowWeather.classList.add("row");
+        todayWeatherEl.appendChild(rowWeather);
+
+        var currentWeather = document.createElement("div");
+        currentWeather.classList.add("col-6", "current-weather");
+        rowWeather.appendChild(currentWeather);
 
         // temperature
         var temperatureEl = document.createElement("li");
         temperatureEl.classList.add("today-weather");
         temperatureEl.innerHTML = "<span><b>Temperature: </b>" + data.current.temp + "&#8451</span>";
-        todayWeatherEl.appendChild(temperatureEl);
+        currentWeather.appendChild(temperatureEl);
         // wind speed
         var windSpeedEl = document.createElement("li");
         windSpeedEl.classList.add("today-weather");
         windSpeedEl.innerHTML = "<b>Wind Speed: </b>" + data.current.wind_speed + " m/s";
-        todayWeatherEl.appendChild(windSpeedEl);
+        currentWeather.appendChild(windSpeedEl);
         // humidity
         var humidityEl = document.createElement("li");
         humidityEl.classList.add("today-weather");
         humidityEl.innerHTML = "<b>Humidity: </b>" + data.current.humidity + "%";
-        todayWeatherEl.appendChild(humidityEl);
+        currentWeather.appendChild(humidityEl);
         // UV index
         var uvIndexEl = document.createElement("li");
         uvIndexEl.classList.add("today-weather");
         uvIndexEl.innerHTML = "<b>UV Index: </b><span class='uv-index'>" + data.current.uvi + "</span>";
-        todayWeatherEl.appendChild(uvIndexEl);
+        currentWeather.appendChild(uvIndexEl);
 
         if (data.current.uvi>=0 && data.current.uvi<3) {
             var uvColor = document.querySelector(".uv-index");
@@ -175,10 +183,47 @@ function fetchApiWeather(cityCoord) {
             uvColor.classList.add("violet");
         }
         // can add a UV index table (bootstrap)
-        // 
+        var uvIndexTable = document.createElement("div");
+        uvIndexTable.classList.add("col-6", "uv-table", "text-center");
+        uvIndexTable.innerHTML = `<table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                        <th scope="col">UV Index</th>
+                                        <th scope="col">Color</th>
+                                        <th scope="col">Risk of harm</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                        <th scope="row">0-2</th>
+                                        <td class="green">Green</td>
+                                        <td>Low</td>
+                                        </tr>
+                                        <tr>
+                                        <th scope="row">3-5</th>
+                                        <td class="yellow">Yellow</td>
+                                        <td>Moderate</td>
+                                        </tr>
+                                        <tr>
+                                        <th scope="row">6-7</th>
+                                        <td class="orange">Orange</td>
+                                        <td>High</td>
+                                        </tr>
+                                        <tr>
+                                        <th scope="row">8-10</th>
+                                        <td class="red">Red</td>
+                                        <td>Very high</td>
+                                        </tr>
+                                        <tr>
+                                        <th scope="row">11+</th>
+                                        <td class="violet">Violet</td>
+                                        <td>Extreme</td>
+                                        </tr>
+                                    </tbody>
+                                </table><br/>`;
+            rowWeather.appendChild(uvIndexTable);
 
         fiveDayForecast(data.daily);
-
     });
 }
 
@@ -272,8 +317,13 @@ function removeLastOne() {
     localStorage.setItem("city", JSON.stringify(cityData));
 }
 
+function subscribeEl(event) {
+    
+    alert("Thanks for subscribing");
+}
+
 searchCityBtn.addEventListener("click", searchCityEl);
 btnClearEl.addEventListener("click", clearHistoryEl);
 historyEl.addEventListener("click", searchHistoryCity);
-
+btnsubscribe.addEventListener("click", subscribeEl);
 loadsearch();
