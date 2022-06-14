@@ -8,6 +8,7 @@ var todayWeatherEl = document.querySelector(".today");
 var fiveDayEl = document.querySelector(".fiveday-forecast");
 var fiveDaytemp = document.querySelector(".card-body");
 var btnsubscribe = document.querySelector(".btn-subscribe");
+var apiKey = "4f585493f941e0eeef3857860aa417e6";
 
 // starting search
 function searchCityEl() {
