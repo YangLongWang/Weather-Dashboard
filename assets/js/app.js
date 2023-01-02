@@ -1,6 +1,5 @@
 var cityData = [];
 var cityId = 0;
-// var cityCoord = {};
 var searchCityBtn = document.querySelector("#btn-search-city");
 var searchCity = document.querySelector("#search-city");
 var historyEl = document.querySelector(".history-part");
@@ -10,10 +9,10 @@ var fiveDayEl = document.querySelector(".fiveday-forecast");
 var fiveDaytemp = document.querySelector(".card-body");
 var btnsubscribe = document.querySelector(".btn-subscribe");
 var apiKey = "4f585493f941e0eeef3857860aa417e6";
-var ipstackApikey = "ee00883fe99f94226737ac245dbdcab7";
 
 // loading after
 window.addEventListener("load", function () {
+  var ipstackApikey = "ee00883fe99f94226737ac245dbdcab7";
   var location = "http://api.ipstack.com/check?access_key=" + ipstackApikey;
   console.log(location);
   fetch(location).then(function (response) {
