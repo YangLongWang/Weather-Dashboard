@@ -14,12 +14,11 @@ var apiKey = "4f585493f941e0eeef3857860aa417e6";
 window.addEventListener("load", function () {
   var ipstackApikey = "ee00883fe99f94226737ac245dbdcab7";
   var location = "http://api.ipstack.com/check?access_key=" + ipstackApikey;
-  console.log(location);
+
   fetch(location).then(function (response) {
     if (response.ok) {
       response.json().then(function (data) {
         var cityCoord = { lat: data.latitude, lon: data.longitude };
-
         fetchApiWeather(cityCoord);
       });
     } else {
@@ -32,7 +31,7 @@ window.addEventListener("load", function () {
 function searchCityEl() {
   var city = searchCity.value.toLowerCase();
   if (!city) {
-    alert("please enter a city");
+    alert("Please enter a city");
   } else {
     var searchCityObj = {
       record: city,
