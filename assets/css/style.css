@@ -21,10 +21,13 @@ h1 {
     color: #fff;
 }
 
-.container .row:first-child {
+/* .container .row:first-child {
+    background: url(../images/weather.jpg);
+} */
+
+#header-background {
     background: url(../images/weather.jpg);
 }
-
 
 .form-search {
     border-bottom: 1px solid black;
