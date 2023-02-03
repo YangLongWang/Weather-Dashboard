@@ -12,19 +12,39 @@ var apiKey = "4f585493f941e0eeef3857860aa417e6";
 
 // loading after
 window.addEventListener("load", function () {
-  var ipstackApikey = "ee00883fe99f94226737ac245dbdcab7";
-  var location = "http://api.ipstack.com/check?access_key=" + ipstackApikey;
+  // var ipstackApikey = "ee00883fe99f94226737ac245dbdcab7";
+  // var location = "http://api.ipstack.com/check?access_key=" + ipstackApikey;
 
-  fetch(location).then(function (response) {
-    if (response.ok) {
-      response.json().then(function (data) {
-        var cityCoord = { lat: data.latitude, lon: data.longitude };
-        fetchApiWeather(cityCoord);
-      });
-    } else {
-      alert("Please enter a city.");
-    }
-  });
+  // fetch(location).then(function (response) {
+  //   if (response.ok) {
+  //     response.json().then(function (data) {
+  //       var cityCoord = { lat: data.latitude, lon: data.longitude };
+  //       fetchApiWeather(cityCoord);
+  //     });
+  //   } else {
+  //     alert("Please enter a city.");
+  //   }
+  // });
+
+  const options = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Key": "8c7f5505a9mshbeda1d20024b8f4p11cfd0jsn6f20bc102b9e",
+      "X-RapidAPI-Host": "spott.p.rapidapi.com",
+    },
+  };
+
+  fetch("https://spott.p.rapidapi.com/places/ip/me", options)
+    .then((response) => response.json())
+    .then(function (data) {
+      console.log(data);
+      var cityCoord = {
+        lat: data.coordinates.latitude,
+        lon: data.coordinates.longitude,
+      };
+      fetchApiWeather(cityCoord);
+    })
+    .catch((err) => console.error(err));
 });
 
 // starting search
