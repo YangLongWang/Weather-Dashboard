@@ -1,4 +1,5 @@
 # Weather-Dashboard
+
 ## Table of contents
 
 - [Overview](#overview)
@@ -14,6 +15,7 @@
 ## Overview
 
 ### Purpose
+
 - Seeing the weather outlook for multiple cities, travelers can plan a trip accordingly
 
 ### The challenge
@@ -23,7 +25,7 @@ Users should be able to:
 - search a city to check current weather
 - show 5 more days weather forecast
 - click a city in search history, then show that weather condition
-
+- Can display the weather conditions at the current location
 
 ### Screenshot
 
@@ -61,7 +63,7 @@ var month = months[fiveDaydt.getMonth()];
 var date = fiveDaydt.getDate();
 var time = month + ' ' + date + ' ' + year;
 var fiveDayIcon = daily[i].weather[0].icon;
-var fiveDayTemp = daily[i].temp.day;     
+var fiveDayTemp = daily[i].temp.day;
 var fiveDayWind = daily[i].wind_speed;
 var fiveDayHumidity = daily[i].humidity;
 ```
